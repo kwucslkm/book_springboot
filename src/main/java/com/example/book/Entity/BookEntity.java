@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,7 +33,7 @@ public class BookEntity {
 
 
     public static List<BookDTO> toSaveDTO(List<BookEntity> bookEntities) {
-        List<BookDTO> bookDTOList = null;
+        List<BookDTO> bookDTOList = new ArrayList<>();
         for (BookEntity e : bookEntities) {
             BookDTO bookDTO = new BookDTO();
             bookDTO.setBookName(e.getBookName());
