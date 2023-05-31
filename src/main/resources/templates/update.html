@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+
+<form action="/book/update/" method="post">
+    <input type="text" name="id" th:value="${book.id}"><br>
+    <input type="text" name="bookName" th:value="${book.bookName}"><br>
+    <input type="text" name="bookAuthor" th:value="${book.bookAuthor}"><br>
+    <input type="text" name="bookPrice" th:value="${book.bookPrice}"><br>
+    <input type="submit" value="수정"><br>
+
+</form>
+</body>
+</html>

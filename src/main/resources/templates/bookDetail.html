@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+<table>
+    <tr>
+        <th>책번호</th>
+        <td th:text="${book.id}"></td>
+    </tr>
+    <tr>
+        <th>책제목</th>
+        <td th:text="${book.bookName}"></td>
+    </tr>
+    <tr>
+        <th>지은이</th>
+        <td th:text="${book.bookAuthor}"></td>
+    </tr>
+    <tr>
+        <th>가격</th>
+        <td th:text="${book.bookPrice}"></td>
+    </tr>
+
+
+</table>
+</body>
+</html>

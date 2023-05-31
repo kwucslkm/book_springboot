@@ -3,15 +3,15 @@ package com.example.book.Entity;
 import com.example.book.dto.BookDTO;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "book_table")
+@ToString
 public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,23 +24,28 @@ public class BookEntity {
     private int bookPrice;
 
     public static BookEntity toSaveEntity(BookDTO bookDTO) {
+//        BookEntity bookEntity = new BookEntity();
+//        bookEntity.setBookName(bookDTO.getBookName());
+//        bookEntity.setBookAuthor(bookDTO.getBookAuthor());
+//        bookEntity.setBookPrice(bookDTO.getBookPrice());
+        return toSaveEntityNoId(bookDTO);
+    }
+
+
+    public static BookEntity toUpdateEntity(BookDTO bookDTO) {
+        BookEntity bookEntity = toSaveEntityNoId(bookDTO);
+//        BookEntity bookEntity = new BookEntity();
+//        bookEntity.setBookName(bookDTO.getBookName());
+//        bookEntity.setBookAuthor(bookDTO.getBookAuthor());
+//        bookEntity.setBookPrice(bookDTO.getBookPrice());Book20230530Application
+        bookEntity.setId(bookDTO.getId());
+        return bookEntity;
+    }
+    public static BookEntity toSaveEntityNoId(BookDTO bookDTO){
         BookEntity bookEntity = new BookEntity();
         bookEntity.setBookName(bookDTO.getBookName());
         bookEntity.setBookAuthor(bookDTO.getBookAuthor());
         bookEntity.setBookPrice(bookDTO.getBookPrice());
         return bookEntity;
-    }
-
-
-    public static List<BookDTO> toSaveDTO(List<BookEntity> bookEntities) {
-        List<BookDTO> bookDTOList = new ArrayList<>();
-        for (BookEntity e : bookEntities) {
-            BookDTO bookDTO = new BookDTO();
-            bookDTO.setBookName(e.getBookName());
-            bookDTO.setBookAuthor(e.getBookAuthor());
-            bookDTO.setBookPrice(e.getBookPrice());
-            bookDTOList.add(bookDTO);
-        }
-        return bookDTOList;
     }
 }

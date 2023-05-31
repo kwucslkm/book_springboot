@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class BookController {
     }
 
     @PostMapping("/save")
-    public String saveform(@ModelAttribute BookDTO bookDTO) {
+    public String saveForm(@ModelAttribute BookDTO bookDTO) {
         bookService.save(bookDTO);
 
         return "index";
@@ -34,6 +35,30 @@ public class BookController {
         model.addAttribute("books", bookDTOList);
         return "books";
 
+    }
+    @GetMapping("/book/{id}")
+    public String findById(@PathVariable Long id, Model model){
+        BookDTO bookDTO = bookService.findById(id);
+        model.addAttribute("book",bookDTO);
+        return "bookDetail";
+    }
+    @GetMapping("/book/delete/{id}")
+    public String delete(@PathVariable Long id){
+        bookService.delete(id);
+        return "redirect:/books";
+    }
+    @GetMapping("/book/update/{id}")
+    public String updateForm(@PathVariable Long id, Model model){
+        BookDTO bookDTO = bookService.findById(id);
+        model.addAttribute("book",bookDTO);
+
+//        bookService.update(id);
+        return "update";
+    }
+    @PostMapping("/book/update")
+    public String update(@ModelAttribute BookDTO bookDTO){
+        bookService.update(bookDTO);
+        return "redirect:/books";
     }
 
 }
